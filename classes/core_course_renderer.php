@@ -15,10 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This is built using the bootstrapbase template to allow for new theme's using
- * Moodle's new Bootstrap theme engine
+ * Essential is a clean and customizable theme.
  *
  * @package     theme_essential
+ * @copyright   2016 Gareth J Barnard
  * @copyright   2015 Gareth J Barnard
  * @copyright   2014 Gareth J Barnard, David Bezemer
  * @copyright   2013 Julian Ridden
@@ -190,6 +190,9 @@ class theme_essential_core_course_renderer extends core_course_renderer {
             if (($coursehascontacts == false) && (empty($courseoverviewfiles))) {
                 $summaryclass .= ' fullsummarywidth';
             }
+            if (!$course->visible) {
+                $summaryclass .= ' dimmed';
+            }
             $content .= html_writer::start_tag('div', array('class' => $summaryclass));
             $content .= $chelper->get_course_formatted_summary($course,
                     array('overflowdiv' => true, 'noclean' => true, 'para' => false));
@@ -221,6 +224,9 @@ class theme_essential_core_course_renderer extends core_course_renderer {
         // Display course contacts.  See course_in_list::get_course_contacts().
         if ($coursehascontacts) {
             $teacherclass = 'teachers';
+            if (!$course->visible) {
+                $teacherclass .= ' dimmed';
+            }
             if ((!empty($courseoverviewfiles)) && (!$coursehassummary)) {
                 $teacherclass .= ' courseboxright';
             } else if ((empty($courseoverviewfiles)) && (!$coursehassummary)) {
@@ -229,6 +235,10 @@ class theme_essential_core_course_renderer extends core_course_renderer {
                 $teacherclass .= ' fullsummarywidth';
             }
             $content .= html_writer::start_tag('ul', array('class' => $teacherclass));
+            $teacherlinkattributes = array();
+            if (!$course->visible) {
+                $teacherlinkattributes['class'] = 'dimmed';
+            }
             foreach ($course->get_course_contacts() as $userid => $coursecontact) {
                 $faiconsetting = \theme_essential\toolbox::get_setting('courselistteachericon');
                 $faiconsettinghtml = (empty($faiconsetting)) ? '' : '<span aria-hidden="true" class="fa fa-'.
@@ -236,7 +246,7 @@ class theme_essential_core_course_renderer extends core_course_renderer {
                 $name = $faiconsettinghtml.$coursecontact['rolename'].': '.
                         html_writer::link(new moodle_url('/user/view.php',
                                 array('id' => $userid, 'course' => SITEID)),
-                            $coursecontact['username']);
+                            $coursecontact['username'], $teacherlinkattributes);
                 $content .= html_writer::tag('li', $name);
             }
             $content .= html_writer::end_tag('ul'); // Class .teachers.

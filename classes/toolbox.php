@@ -15,10 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This is built using the bootstrapbase template to allow for new theme's using
- * Moodle's new Bootstrap theme engine
+ * Essential is a clean and customizable theme.
  *
  * @package     theme_essential
+ * @copyright   2016 Gareth J Barnard
  * @copyright   2015 Gareth J Barnard
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -442,6 +442,70 @@ class toolbox {
         return $css;
     }
 
+    static private function get_categories() {
+        global $CFG;
+        include_once($CFG->libdir . '/coursecatlib.php');
+
+        $cid = array();
+        $categories = \coursecat::get(0)->get_children();
+
+        self::traverse_categories($categories, $cid);
+
+        return $cid;
+    }
+
+    static private function traverse_categories($categories, &$cid) {
+        foreach ($categories as $category) {
+            $cid[] = $category->id;
+            $catchildren = \coursecat::get($category->id)->get_children();
+            if ($catchildren) {
+                self::traverse_categories($catchildren, $cid);
+            }
+        }
+    }
+
+    static public function get_current_category() {
+        $us = self::check_corerenderer();
+
+        return $us->get_current_category();
+    }
+
+    static public function set_categorycoursetitleimages($css) {
+        $tag = '[[setting:categorycoursetitle]]';
+        $replacement = '';
+
+        if (self::get_setting('enablecategorycti')) {
+            $categories = self::get_categories();
+
+            foreach ($categories as $cid) {
+                $image = self::get_setting('categoryct'.$cid.'image');
+                $imageurl = false;
+                if ($image) {
+                    $imageurl = self::setting_file_url('categoryct'.$cid.'image', 'categoryct'.$cid.'image');
+                } else {
+                    $imageurlsetting = self::get_setting('categoryctimageurl'.$cid);
+                    if ($imageurlsetting) {
+                        $imageurl = $imageurlsetting;
+                    }
+                }
+                if ($imageurl) {
+                    $replacement .= '.categorycti-'.$cid.' {';
+                    $replacement .= 'background-image: url(\''.$imageurl.'\');';
+                    $replacement .= 'height: '.self::get_setting('categorycti'.$cid.'height').'px;';
+                    $replacement .= '}';
+                    $replacement .= '.categorycti-'.$cid.' .coursetitle {';
+                    $replacement .= 'color: '.self::get_setting('categorycti'.$cid.'textcolour').';';
+                    $replacement .= 'background-color: '.self::get_setting('categorycti'.$cid.'textbackgroundcolour').';';
+                    $replacement .= 'opacity: '.self::get_setting('categorycti'.$cid.'textbackgroundopactity').';';
+                    $replacement .= '}';
+                }
+            }
+        }
+
+        $css = str_replace($tag, $replacement, $css);
+        return $css;
+    }
+
     /**
      * Returns the RGB for the given hex.
      *
@@ -492,11 +556,31 @@ class toolbox {
 
     static public function set_headerbackground($css, $headerbackground) {
         $tag = '[[setting:headerbackground]]';
+
+        $headerbackgroundstyle = self::get_setting('headerbackgroundstyle');
+        $replacement = '#page-header {';
+        $replacement .= 'background-image: url(\'';
         if ($headerbackground) {
-            $replacement = $headerbackground;
+            $replacement .= $headerbackground;
         } else {
-            $replacement = self::pix_url('bg/header', 'theme');
+            $replacement .= self::pix_url('bg/header', 'theme');
+            $headerbackgroundstyle = 'tiled';
         }
+        $replacement .= '\');';
+
+        if ($headerbackground) {
+            $replacement .= 'background-size: contain;';
+        }
+
+        if ($headerbackgroundstyle == 'tiled') {
+            $replacement .= 'background-repeat: repeat;';
+        } else {
+            $replacement .= 'background-repeat: no-repeat;';
+            $replacement .= 'background-position: center;';
+        }
+
+        $replacement .= '}';
+
         $css = str_replace($tag, $replacement, $css);
         return $css;
     }

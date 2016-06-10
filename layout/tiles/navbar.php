@@ -15,16 +15,16 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This is built using the bootstrapbase template to allow for new theme's using
- * Moodle's new Bootstrap theme engine
+ * Essential is a clean and customizable theme.
  *
  * @package     theme_essential
- * @copyright   2013 Julian Ridden
+ * @copyright   2016 Gareth J Barnard
  * @copyright   2014 Gareth J Barnard, David Bezemer
+ * @copyright   2013 Julian Ridden
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 ?>
-    <nav id="essentialnavbar" role="navigation" class="moodle-has-zindex affix-top<?php echo ($oldnavbar) ? ' oldnavbar' : '';  echo ($haslogo) ? ' logo' : ' nologo';?>">
+    <nav id="essentialnavbar" role="navigation" class="moodle-has-zindex<?php echo ($oldnavbar) ? ' oldnavbar' : '';  echo ($haslogo) ? ' logo' : ' nologo';?>">
         <div class="navbar">
             <div class="container-fluid navbar-inner">
                 <div class="row-fluid">

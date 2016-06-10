@@ -1,3 +1,41 @@
+New in 3.0.1.3
+==============
+- FIX: MDL-52800 - RTL styling for in place editable tooltip.
+- FIX: MDL-52815 - Groups and members dropdowns overlapping on mobile devices.
+- FIX: MDL-53855 - Navbar should be in exactly one nav region, and that should be labelled.
+- FIX: Issue #659: Links with anchors don't work with the "flexsections" course format.  Thanks to Jay Knight for his input.
+- FIX: Issue #662: Site pages indent.
+- FIX: Issue #664: Broken Alt-text in blocks.
+- FIX: Issue #668: Course page header missing enrolled user info.
+- NEW: Tidy up administration block.
+- NEW: Category and course 'course title' images.  Thanks to Murdoch University, Perth, WA for supporting this enhancement.
+
+New in 3.0.1.2
+==============
+- FIX: Issue #642: Advanced Grading creating template form issue.
+- FIX: Issue #649: Guest access confusing.
+- FIX: Issue #653: Quiz question preview: does not uses the selected color scheme.
+- FIX: Issue #654: Adding a quiz question menu does not use the selected colour scheme.
+- FIX: Font serving instructions.  See: https://moodle.org/mod/forum/discuss.php?d=330553.
+- FIX: Invalid CSS attribute value in carousel.less.
+- FIX: Footer position when using docking and footer is not at the bottom.
+- FIX: MDL-53489 - Quiz editing: if you put in a very long heading, the page layout breaks.
+- FIX: Improve logo setting description.
+- FIX: Missing '$setting->set_updatedcallback('theme_reset_all_caches');' on logo width setting.
+- FIX/NEW: Issue #646: Implement MDL-53147 from M3.1 - 'Reading message screen broken when reading one message and have another unread'.
+- NEW: Issue #647: Navigation bar in course: without course category links.  Thanks to Christian Niemczik for supporting and funding the work on the Essential Theme.
+- NEW: Issue #652: Header logo and background refinements.
+- NEW: Have the 'This course' menu appear on other course related pages.
+- NEW: Tidy up licenses.
+- NEW: Tidy up Font Awesome CSS as WOFF2 support was only an issue in M2.8.
+- NEW: Logo dimension validation.
+- NEW: Update to FontAwesome 4.6.1.
+- NEW: Add 'usesiteicon' setting to allow the site icon not to be shown if desired.
+- NEW: Add radio button selection for breadcrumb style.
+- NEW: Add image and direction capability to radio button selection for breadcrumb style.
+- NEW: Add radio button image selection for 'oldnavbar' setting.
+- NEW: Add radio button image selection for 'slidecaptionoptions' setting.
+
 New in 3.0.1.1
 ==============
 - FIX: Issue #351: Footer doesn't stay at bottom.
@@ -19,8 +57,12 @@ New in 3.0.1.1
 - FIX: Alternative colour border colours.
 - FIX: Narrow page width and page header.
 - FIX: Tidy the header.
-- NEW: Improve efficiency of colour switcher.
+- FIX: Admin submit button hover on alternative colour schemes.
+- FIX: Dimmed icon colours.
+- FIX: Hidden course summary box colours to be dimmed.
 - NEW: Issue #632: View StyleGuide without logging on.
+- NEW: Issue #645: Add setting to toggle display of hidden courses in Custom Menu.  Thanks to Mathieu Pelletier for this code.
+- NEW: Improve efficiency of colour switcher.
 - NEW: Add logo width setting.
 - NEW: Hide title area when showing social icons when collapsed.
 - NEW: Bigger user picture when using the old navbar position and at the top.

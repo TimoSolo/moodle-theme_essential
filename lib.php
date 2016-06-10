@@ -15,12 +15,12 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This is built using the bootstrapbase template to allow for new theme's using
- * Moodle's new Bootstrap theme engine
+ * Essential is a clean and customizable theme.
  *
  * @package     theme_essential
- * @copyright   2013 Julian Ridden
+ * @copyright   2016 Gareth J Barnard
  * @copyright   2014 Gareth J Barnard, David Bezemer
+ * @copyright   2013 Julian Ridden
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -55,7 +55,7 @@ function theme_essential_pluginfile($course, $cm, $context, $filearea, $args, $f
         } else if (preg_match("/^fontfile(eot|otf|svg|ttf|woff|woff2)(heading|body)$/", $filearea)) {
             // Ref: http://www.regexr.com/.
             return $theme->setting_file_serve($filearea, $args, $forcedownload, $options);
-        } else if (preg_match("/^(marketing|slide)[1-9][0-9]*image$/", $filearea)) {
+        } else if (preg_match("/^(marketing|slide|categoryct)[1-9][0-9]*image$/", $filearea)) {
             return $theme->setting_file_serve($filearea, $args, $forcedownload, $options);
         } else if ($filearea === 'iphoneicon') {
             return $theme->setting_file_serve('iphoneicon', $args, $forcedownload, $options);
@@ -432,6 +432,9 @@ function theme_essential_process_css($css, $theme) {
     $setting = 'marketing3image';
     $marketingimage = \theme_essential\toolbox::setting_file_url($setting, $setting);
     $css = \theme_essential\toolbox::set_marketingimage($css, $marketingimage, $setting);
+
+    // Category course title images.
+    $css = \theme_essential\toolbox::set_categorycoursetitleimages($css);
 
     // Set custom CSS.
     $customcss = \theme_essential\toolbox::get_setting('customcss');

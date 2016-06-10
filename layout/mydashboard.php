@@ -15,8 +15,7 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This is built using the bootstrapbase template to allow for new theme's using
- * Moodle's new Bootstrap theme engine
+ * Essential is a clean and customizable theme.
  *
  * @package     theme_essential
  * @copyright   2016 Gareth J Barnard
@@ -57,10 +56,7 @@ if ($tablet) {
 } else {
     echo '<section id="region-main" class="span8 desktop-first-column">';
 }
-if ($COURSE->id > 1) {
-    echo $OUTPUT->heading(format_string($COURSE->fullname), 1, 'coursetitle');;
-    echo '<div class="bor"></div>';
-}
+echo $OUTPUT->course_title();
 echo $OUTPUT->course_content_header();
 
 if ($coursecontentsearch) {

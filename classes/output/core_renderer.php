@@ -15,7 +15,10 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
+ * Essential is a clean and customizable theme.
+ *
  * @package     theme_essential
+ * @copyright   2016 Gareth J Barnard
  * @copyright   2015 Gareth J Barnard
  * @copyright   2014 Gareth J Barnard, David Bezemer
  * @copyright   2013 Julian Ridden
@@ -64,18 +67,30 @@ class core_renderer extends \core_renderer {
             if ($breadcrumbstyle == '4') {
                 $breadcrumbstyle = '1'; // Fancy style with no collapse.
             }
-            $breadcrumbs = html_writer::start_tag('ul', array('class' => "breadcrumb style$breadcrumbstyle"));
+
+            $showcategories = true;
+            if (($this->page->pagelayout == 'course') || ($this->page->pagelayout == 'incourse')) {
+                $showcategories = \theme_essential\toolbox::get_setting('categoryincoursebreadcrumbfeature');
+            }
+
+            $breadcrumbs = html_writer::tag('span', get_string('pagepath'), array('class' => 'accesshide', 'id' => 'navbar-label'));
+            $breadcrumbs .= html_writer::start_tag('nav', array('aria-labelledby' => 'navbar-label'));
+            $breadcrumbs .= html_writer::start_tag('ul', array('class' => "breadcrumb style$breadcrumbstyle"));
             foreach ($this->page->navbar->get_items() as $item) {
                 // Test for single space hide section name trick.
                 if ((strlen($item->text) == 1) && ($item->text[0] == ' ')) {
+                    continue;
+                }
+                if ((!$showcategories) && ($item->type == \navigation_node::TYPE_CATEGORY)) {
                     continue;
                 }
                 $item->hideicon = true;
                 $breadcrumbs .= html_writer::tag('li', $this->render($item));
             }
             $breadcrumbs .= html_writer::end_tag('ul');
+            $breadcrumbs .= html_writer::end_tag('nav');
         } else {
-            $breadcrumbs = html_writer::tag('p', '&nbsp;');
+            $breadcrumbs = '';
         }
         return $breadcrumbs;
     }
@@ -171,6 +186,146 @@ class core_renderer extends \core_renderer {
             }
         }
         return $heading;
+    }
+
+    /**
+     * Outputs the course title.
+     *
+     * @return string the HTML to output.
+     */
+    public function course_title() {
+        $content = '';
+        if ($this->page->course->id > 1) {
+            $enablecategorycti = $this->get_setting('enablecategorycti');
+            $override = false;
+            if ($enablecategorycti) {
+                // Is there an override?
+                if (strpos($this->page->course->summary, 'categorycti') !== false) {
+                    $context = \context_course::instance($this->page->course->id);
+                    $summary = file_rewrite_pluginfile_urls($this->page->course->summary, 'pluginfile.php',
+                        $context->id, 'course', 'summary', null);
+
+                    $matches = array();
+                    if (preg_match_all("/<img[^>]*>/", $summary, $matches) !== false) {
+                        foreach ($matches[0] as $imgmatches) {
+                            if (strpos($imgmatches, 'categorycti') !== false) {
+                                $imgparts = array();
+                                if (preg_match_all("/(src|ctih|ctit|ctib|ctio)=\"([^\"]*)\"/", $imgmatches, $imgparts) !== false) {
+                                    $imgvalues = array('ctih' => '200', 'ctit' => '#ffffff', 'ctib' => '#222222',
+                                        'ctio' => '0.8');
+                                    $ctihs = $this->get_setting('ctioverrideheight');
+                                    $ctits = $this->get_setting('ctioverridetextcolour');
+                                    $ctibs = $this->get_setting('ctioverridetextbackgroundcolour');
+                                    $ctios = $this->get_setting('ctioverridetextbackgroundopacity');
+                                    if ($ctihs) {
+                                        $imgvalues['ctih'] = $ctihs;
+                                    }
+                                    if ($ctits) {
+                                        $imgvalues['ctit'] = $ctits;
+                                    }
+                                    if ($ctibs) {
+                                        $imgvalues['ctib'] = $ctibs;
+                                    }
+                                    if ($ctios) {
+                                        $imgvalues['ctio'] = $ctios;
+                                    }
+                                    // Index '1' is the 'key' and index '2' is the value.  Index '0' is them combined.
+                                    foreach ($imgparts[1] as $imgpartskey => $imgpartsvalue) {
+                                        $imgvalues[$imgpartsvalue] = $imgparts[2][$imgpartskey];
+                                    }
+                                    $override = true;
+                                    $content .= '<div class="categorycti" style="height: '.$imgvalues['ctih'].'px;';
+                                    $content .= ' background-image: url('.$imgvalues['src'].');">';
+                                    /* This is a level 1 h1 header so no need to call 'heading' method for return to section
+                                       and also parent version does not support addition of the style attribute. */
+                                    $content .= '<div class="coursetitle" style="color: '.$imgvalues['ctit'].'; background-color: ';
+                                    $content .= $imgvalues['ctib'].'; opacity: '.$imgvalues['ctio'].';">';
+                                    $content .= $this->context_header().'</div>';
+                                    // Closing 'div' is below because $enablecategorycti would be true.
+                                }
+                                break;
+                            }
+                        }
+                    }
+                }
+                // If the override did not exist or was not ok, then see if there is a category image.
+                if ($override == false) {
+                    $imagecatid = $this->get_categorycti_catid();
+                    if ($imagecatid) {
+                        $content .= '<div class=\'categorycti categorycti-'.$imagecatid.'\' >';
+                    } else {
+                        $enablecategorycti = false;
+                    }
+                }
+            }
+            if ($override == false) {
+                $content .= '<div class="coursetitle">'.$this->context_header().'</div>';
+            }
+            if ($enablecategorycti) {
+                $content .= '</div>';
+            }
+
+            $content .= '<div class="bor"></div>';
+        }
+
+        return $content;
+    }
+
+    /**
+     * Gets the current category.
+     *
+     * @return int Category id.
+     */
+    protected function get_current_category() {
+        $catid = 0;
+
+        if (is_array($this->page->categories)) {
+            $catids = array_keys($this->page->categories);
+            $catid = reset($catids);
+        } else if (!empty($$this->page->course->category)) {
+            $catid = $this->page->course->category;
+        }
+
+        return $catid;
+    }
+
+    /**
+     * Gets the category course title image category id for the given category or 0 if not found.
+     * Walks up the parent tree if the current category does not have an image.
+     *
+     * @return int Category id.
+     */
+    protected function get_categorycti_catid() {
+        $catid = 0;
+        $currentcatid = $this->get_current_category();
+
+        if ($currentcatid) {
+            $image = $this->get_setting('categoryct'.$currentcatid.'image');
+            if ($image) {
+                $catid = $currentcatid;
+            } else {
+                $imageurl = $this->get_setting('categoryctimageurl'.$currentcatid);
+                if ($imageurl) {
+                    $catid = $currentcatid;
+                } else {
+                    $parents = array_reverse(\coursecat::get($currentcatid)->get_parents());
+                    foreach ($parents as $parent) {
+                        $image = $this->get_setting('categoryct'.$parent.'image');
+                        if ($image) {
+                            $catid = $parent;
+                            break;
+                        }
+                        $imageurl = $this->get_setting('categoryctimageurl'.$parent);
+                        if ($imageurl) {
+                            $catid = $parent;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+
+        return $catid;
     }
 
     /**
@@ -400,7 +555,7 @@ class core_renderer extends \core_renderer {
             $branch = $coursemenu->add($branchlabel, $branchurl, $branchtitle, $branchsort);
 
             $hometext = get_string('myhome');
-            $homelabel = html_writer::tag('i', '', array('class' => 'fa fa-home')).html_writer::tag('span', ' '.$hometext);
+            $homelabel = html_writer::tag('span', '', array('class' => 'fa fa-home')).html_writer::tag('span', ' '.$hometext);
             $branch->add($homelabel, new moodle_url('/my/index.php'), $hometext);
 
             // Get 'My courses' sort preference from admin config.
@@ -419,7 +574,7 @@ class core_renderer extends \core_renderer {
                         $numcourses += 1;
                     } else if (has_capability('moodle/course:viewhiddencourses', context_course::instance($course->id)) && $hasdisplayhiddenmycourses) {
                         $branchtitle = format_string($course->shortname);
-                        $branchlabel = '<span class="dimmed_text">'.$this->getfontawesomemarkup('slash').
+                        $branchlabel = '<span class="dimmed_text">'.$this->getfontawesomemarkup('eye-slash').
                             format_string($course->fullname) . '</span>';
                         $branchurl = new moodle_url('/course/view.php', array('id' => $course->id));
                         $branch->add($branchlabel, $branchurl, $branchtitle);
@@ -481,15 +636,11 @@ class core_renderer extends \core_renderer {
      * @return custom_menu object
      */
     public function custom_menu_activitystream() {
-        if (($this->page->pagelayout != 'course') && ($this->page->pagelayout != 'incourse') &&
-            ($this->page->pagelayout != 'report')) {
-            return '';
-        }
-
-        $context = context_course::instance($this->page->course->id);
-
         if (!isguestuser()) {
-            if (isset($this->page->course->id) && $this->page->course->id > 1) {
+            if ((($this->page->pagelayout == 'course') || ($this->page->pagelayout == 'incourse') ||
+                ($this->page->pagelayout == 'report') || ($this->page->pagelayout == 'admin') ||
+                ($this->page->pagelayout == 'standard')) &&
+                ((!empty($this->page->course->id) && $this->page->course->id > 1))) {
                 $activitystreammenu = new custom_menu();
                 $branchtitle = get_string('thiscourse', 'theme_essential');
                 $branchlabel = $this->getfontawesomemarkup('book').$branchtitle;
@@ -499,6 +650,7 @@ class core_renderer extends \core_renderer {
                 $branchlabel = $this->getfontawesomemarkup('users').$branchtitle;
                 $branchurl = new moodle_url('/user/index.php', array('id' => $this->page->course->id));
                 $branch->add($branchlabel, $branchurl, $branchtitle, 100003);
+                $context = context_course::instance($this->page->course->id);
                 if (((has_capability('gradereport/overview:view', $context) || has_capability('gradereport/user:view', $context)) &&
                         $this->page->course->showgrades) || has_capability('gradereport/grader:view', $context)) {
                     $branchtitle = get_string('grades');
@@ -952,11 +1104,10 @@ class core_renderer extends \core_renderer {
             $userclass = array('class' => 'dropdown-toggle', 'data-toggle' => 'dropdown');
             $usermenu .= html_writer::link($userurl, $userpic.get_string('guest').$caret, $userclass);
 
-            // Render direct logout link.
+            // Render direct login link.
             $usermenu .= html_writer::start_tag('ul', array('class' => 'dropdown-menu pull-right'));
-            $branchlabel = '<em>'.$this->getfontawesomemarkup('sign-out').get_string('logout').'</em>';
-            $branchurl = new moodle_url('/login/logout.php');
-            $branchurl->param('sesskey', sesskey());
+            $branchlabel = '<em>'.$this->getfontawesomemarkup('sign-in').get_string('login').'</em>';
+            $branchurl = new moodle_url('/login/index.php');
             $usermenu .= html_writer::tag('li', html_writer::link($branchurl, $branchlabel));
 
             // Render Help Link.
@@ -1586,10 +1737,9 @@ class core_renderer extends \core_renderer {
             } else {
                 $theicon = 'reorder';
             }
+            $title = html_writer::tag('h2', $bc->title, $attributes);
             if (!empty($theicon)) {
-                $title = html_writer::tag('h2', $this->getfontawesomemarkup($theicon).$bc->title, $attributes);
-            } else {
-                $title = html_writer::tag('h2', $bc->title, $attributes);
+                $title = $this->getfontawesomemarkup($theicon).$title;
             }
         }
 
@@ -1828,11 +1978,11 @@ class core_renderer extends \core_renderer {
         return $html;
     }
 
-    private function getfontawesomemarkup($theicon, $classes = array(), $attributes = array()) {
+    private function getfontawesomemarkup($theicon, $classes = array(), $attributes = array(), $content = '') {
         $classes[] = 'fa fa-'.$theicon;
         $attributes['aria-hidden'] = 'true';
         $attributes['class'] = implode(' ', $classes);
-        return html_writer::tag('span', '', $attributes);
+        return html_writer::tag('span', $content, $attributes);
     }
 
     /**

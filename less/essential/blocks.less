@@ -7,7 +7,7 @@
   border: 1px solid darken(@wellBackground, 7%);
   .border-radius(@borderRadiusLarge);
   .content {
-    padding: 4px 0px;
+    padding: 4px 0;
   }
   .icon {
     margin-right: 5px;
@@ -82,7 +82,7 @@
 }
 
 #middle-blocks {
-  margin: 15px 0px;
+  margin: 15px 0;
 }
 
 p.tree_item.leaf a {
@@ -124,14 +124,23 @@ p.tree_item.leaf a {
   }
 }
 
-.block_navigation .block_tree .tree_item.hasicon .item-content-wrap {
-  display: inline !important;
+.block_navigation.block .block_tree .tree_item {
+    &.hasicon .item-content-wrap {
+        display: inline !important;
+    }
+    &.branch {
+        padding-left: 0 !important;
+    }
 }
 
 .collapsed .tree_item.branch:before {
   font-family: FontAwesome;
   content: "\f07b";
   margin-right: 5px;
+}
+
+.jsenabled .block_settings .block_tree .tree_item {
+    padding-left: 0 !important;
 }
 
 .jsenabled .block_settings .block_tree .tree_item.branch.loadingbranch:before {
@@ -194,14 +203,14 @@ p.tree_item.leaf a {
   padding: 10px;
   border: 1px solid #EEE;
   border-radius: 5px;
-  margin: 10px 0px 10px 0px;
+  margin: 10px 0 10px 0;
 
   h4 {
     text-align: left;
     padding-bottom: 8px;
     margin-bottom: 8px;
     border-bottom: 1px solid #ccc;
-    margin-top: 0px;
+    margin-top: 0;
     color: #ff6666;
   }
 
@@ -219,25 +228,29 @@ p.tree_item.leaf a {
   margin-bottom: 5px;
   text-transform: uppercase;
   font-weight: normal;
-  padding: 0px;
+  padding: 0;
 }
 
 .block .header .title {
   border-bottom: 1px solid #EEE;
-  padding-left: 0px;
+  padding-left: 0;
+  h2 {
+    display: inline;
+  }
 
   .@{fa-css-prefix} {
     font-size: 1.65em;
     margin-right: .3em;
+    display: inline;
   }
 }
 
 .block_iconic_html .header .title h2:before {
-  padding-right: 0px;
+  padding-right: 0;
   content: none;
 }
 .block.block_iconic_html .header .title h2 .@{fa-css-prefix} {
-  padding-right: 0px !important;
+  padding-right: 0 !important;
   &:before {
     margin-right: .3em;
     font-size: 1.65em;
@@ -248,7 +261,7 @@ p.tree_item.leaf a {
 .block.hidden h3.main,
 .block.hidden .header .title {
   border-bottom: none;
-  margin-bottom: 0px;
+  margin-bottom: 0;
 }
 
 .block_quiz_results {
@@ -258,11 +271,11 @@ p.tree_item.leaf a {
 .block_rss_client {
   .description {
     height: auto;
-    padding-bottom: 0px;
-    margin-bottom: 0px;
+    padding-bottom: 0;
+    margin-bottom: 0;
   }
   .content {
-    padding: 0px;
+    padding: 0;
     a:hover {
       text-decoration: none;
     }
@@ -421,13 +434,13 @@ aside.footer-edit .block {
 // Eliminates need for 'desktop-first-column' but does not work in IE8.
 // Info on: http://www.w3schools.com/cssref/sel_first-of-type.asp
 aside.footer-blocks div.row-fluid div.block:first-of-type {
-    margin-left: 0px;
+    margin-left: 0;
 }
 
 // Support multiple rows when editing otherwise above works, see: http://www.w3schools.com/cssref/sel_nth-of-type.asp
 .footer-nth(@index) {
     aside.footer-edit div.block:nth-of-type(@{index}) {
-        margin-left: 0px;
+        margin-left: 0;
     }
 }
 

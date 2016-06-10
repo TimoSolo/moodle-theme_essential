@@ -15,12 +15,12 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * This is built using the bootstrapbase template to allow for new theme's using
- * Moodle's new Bootstrap theme engine
+ * Essential is a clean and customizable theme.
  *
  * @package     theme_essential
- * @copyright   2013 Julian Ridden
+ * @copyright   2016 Gareth J Barnard
  * @copyright   2014 Gareth J Barnard, David Bezemer
+ * @copyright   2013 Julian Ridden
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -63,12 +63,20 @@ if (!$oldnavbar) {
                 <div class="<?php echo (!$left) ? 'pull-right' : 'pull-left'; ?>">
 <?php
 if (!$haslogo) {
-    echo '<a class="textlogo" href="';
-    echo preg_replace("(https?:)", "", $CFG->wwwroot);
-    echo '">';
-    echo '<span id="headerlogo" aria-hidden="true" class="fa fa-'.\theme_essential\toolbox::get_setting('siteicon').'"></span>';
-    echo '<div class="titlearea">'.$OUTPUT->get_title('header').'</div>';
-    echo '</a>';
+    $usesiteicon = \theme_essential\toolbox::get_setting('usesiteicon');
+    $headertitle = $OUTPUT->get_title('header');
+    if ($usesiteicon || $headertitle) {
+        echo '<a class="textlogo" href="';
+        echo preg_replace("(https?:)", "", $CFG->wwwroot);
+        echo '">';
+        if ($usesiteicon) {
+            echo '<span id="headerlogo" aria-hidden="true" class="fa fa-'.\theme_essential\toolbox::get_setting('siteicon').'"></span>';
+        }
+        if ($headertitle) {
+            echo '<div class="titlearea">'.$headertitle.'</div>';
+        }
+        echo '</a>';
+    }
 } else {
     echo '<a class="logo" href="'.preg_replace("(https?:)", "", $CFG->wwwroot).'" title="'.get_string('home').'"></a>';
 }
