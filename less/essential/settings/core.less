@@ -1,6 +1,13 @@
 /* @group Core */
 @import "../../fontawesome/variables";
 
+img.userpicture,
+img.profilepicture {
+    border-color: ~"[[setting:themecolor]]";
+    border-radius: ~"[[setting:userimageborderradius]]px";
+    box-shadow: 0 0 3px ~"[[setting:themecolor]]";
+}
+
 .moodle-actionmenu[data-enhanced].show {
     .menu {
         background-color: @white; // TODO: Page background colour needs to be a setting.
@@ -11,6 +18,10 @@
                 background-color: ~"[[setting:themeurlcolor]]";
                 .@{fa-css-prefix}:before {
                     color: @white; // TODO: Page background colour needs to be a setting.
+                }
+                img {
+                    background-color: @white;
+                    border-radius: @baseBorderRadius;
                 }
             }
         }

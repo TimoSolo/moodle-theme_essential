@@ -27,6 +27,8 @@
 
 namespace theme_essential\output;
 
+defined('MOODLE_INTERNAL') || die;
+
 trait core_renderer_toolbox {
     public function get_setting($setting) {
         $tcr = array_reverse($this->themeconfig, true);
@@ -59,7 +61,7 @@ trait core_renderer_toolbox {
 
 
     public function pix_url($imagename, $component = 'moodle') {
-        return end($this->themeconfig)->pix_url($imagename, $component);
+        return end($this->themeconfig)->image_url($imagename, $component);
     }
 
     public function get_tile_file($filename) {

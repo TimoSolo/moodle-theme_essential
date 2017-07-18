@@ -17,17 +17,19 @@ define(['jquery', 'theme_bootstrapbase/bootstrap', 'core/log'], function($, boot
     return {
         init: function() {
             $(document).ready(function($) {
-                if ($('#essentialnavbar').length) {
-                    var $essentialnavbar = $('#essentialnavbar');
-                    var pageheaderHeight = $('#page-header').height();
+                if ($("#essentialnavbar").length) {
+                    var $essentialnavbar = $("#essentialnavbar");
+                    var pageheaderHeight = $("#page-header").height();
                     log.debug('Essential affix AMD pageheaderHeight: ' + pageheaderHeight);
                     $essentialnavbar.affix({
                         offset: {
                             top: function() {
+                                pageheaderHeight = $("#page-header").height();
+                                log.debug('Essential affix offset AMD phh: ' + pageheaderHeight);
                                 var wst = $(window).scrollTop();
-                                log.debug('Essential affix AMD wst: ' + wst);
+                                log.debug('Essential affix offset AMD wst: ' + wst);
                                 var diff = pageheaderHeight - wst;
-                                log.debug('Essential affix AMD diff: ' + diff);
+                                log.debug('Essential affix offset AMD diff: ' + diff);
                                 if (diff < 0) {
                                     diff = 0;
                                 }
@@ -36,10 +38,22 @@ define(['jquery', 'theme_bootstrapbase/bootstrap', 'core/log'], function($, boot
                             }
                         }
                     });
+                    $(window).resize(function() {
+                        pageheaderHeight = $("#page-header").height();
+                        log.debug('Essential affix resize AMD phh: ' + pageheaderHeight);
+                        var wst = $(window).scrollTop();
+                        log.debug('Essential affix resize AMD wst: ' + wst);
+                        var diff = pageheaderHeight - wst;
+                        log.debug('Essential affix resize AMD diff: ' + diff);
+                        if (diff < 0) {
+                            diff = 0;
+                        }
+                        $essentialnavbar.css('top', diff + 'px');
+                    });
                 }
             });
             log.debug('Essential affix AMD init');
         }
-    }
+    };
 });
 /* jshint ignore:end */

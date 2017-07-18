@@ -24,6 +24,8 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die;
+
 /**
  * Serves any files associated with the theme settings.
  *
@@ -60,6 +62,10 @@ function theme_essential_pluginfile($course, $cm, $context, $filearea, $args, $f
             // Ref: http://www.regexr.com/.
             return $theme->setting_file_serve($filearea, $args, $forcedownload, $options);
         } else if (preg_match("/^(marketing|slide|categoryct)[1-9][0-9]*image$/", $filearea)) {
+            return $theme->setting_file_serve($filearea, $args, $forcedownload, $options);
+        } else if ($filearea === 'defaultcategoryimage') {
+            return $theme->setting_file_serve('defaultcategoryimage', $args, $forcedownload, $options);
+        } else if (preg_match("/^categoryimage[1-9][0-9]*$/", $filearea)) {
             return $theme->setting_file_serve($filearea, $args, $forcedownload, $options);
         } else if ($filearea === 'iphoneicon') {
             return $theme->setting_file_serve('iphoneicon', $args, $forcedownload, $options);
@@ -369,23 +375,23 @@ function theme_essential_process_css($css, $theme) {
                 \theme_essential\toolbox::hexadjust($alternativethemedefaultbuttonbackgroundhovercolour, 10),
                 '#3ad4ff', '0.25');
 
-            $css = \theme_essential\toolbox::set_alternativecolor($css, 'iconcolor' . $alternative,
-                \theme_essential\toolbox::get_setting('alternativethemeiconcolor' . $alternative), $default);
+            $css = \theme_essential\toolbox::set_alternativecolor($css, 'iconcolor'.$alternative,
+                \theme_essential\toolbox::get_setting('alternativethemeiconcolor'.$alternative), $default);
 
-            $css = \theme_essential\toolbox::set_alternativecolor($css, 'navcolor' . $alternative,
-                \theme_essential\toolbox::get_setting('alternativethemenavcolor' . $alternative), $default);
+            $css = \theme_essential\toolbox::set_alternativecolor($css, 'navcolor'.$alternative,
+                \theme_essential\toolbox::get_setting('alternativethemenavcolor'.$alternative), $default);
 
-            $css = \theme_essential\toolbox::set_alternativecolor($css, 'hovercolor' . $alternative,
-                \theme_essential\toolbox::get_setting('alternativethemehovercolor' . $alternative), $defaulthover);
+            $css = \theme_essential\toolbox::set_alternativecolor($css, 'hovercolor'.$alternative,
+                \theme_essential\toolbox::get_setting('alternativethemehovercolor'.$alternative), $defaulthover);
 
-            $css = \theme_essential\toolbox::set_alternativecolor($css, 'stripetextcolour' . $alternative,
-                \theme_essential\toolbox::get_setting('alternativethemestripetextcolour' . $alternative), $defaultstripetext);
+            $css = \theme_essential\toolbox::set_alternativecolor($css, 'stripetextcolour'.$alternative,
+                \theme_essential\toolbox::get_setting('alternativethemestripetextcolour'.$alternative), $defaultstripetext);
 
-            $css = \theme_essential\toolbox::set_alternativecolor($css, 'stripebackgroundcolour' . $alternative,
-                \theme_essential\toolbox::get_setting('alternativethemestripebackgroundcolour' . $alternative), $defaultstripebackground);
+            $css = \theme_essential\toolbox::set_alternativecolor($css, 'stripebackgroundcolour'.$alternative,
+                \theme_essential\toolbox::get_setting('alternativethemestripebackgroundcolour'.$alternative), $defaultstripebackground);
 
-            $css = \theme_essential\toolbox::set_alternativecolor($css, 'stripeurlcolour' . $alternative,
-                \theme_essential\toolbox::get_setting('alternativethemestripeurlcolour' . $alternative), $defaultstripeurl);
+            $css = \theme_essential\toolbox::set_alternativecolor($css, 'stripeurlcolour'.$alternative,
+                \theme_essential\toolbox::get_setting('alternativethemestripeurlcolour'.$alternative), $defaultstripeurl);
 
             $alternativethememycoursesorderenrolbackcolour = \theme_essential\toolbox::get_setting(
                 'alternativethememycoursesorderenrolbackcolour'.$alternative);
@@ -436,14 +442,15 @@ function theme_essential_process_css($css, $theme) {
         }
     }
 
-    // Set the background image for the logo.
-    $logo = \theme_essential\toolbox::setting_file_url('logo', 'logo');
-    $css = \theme_essential\toolbox::set_logo($css, $logo);
+    // Set the logo desktop and mobile width.
+    $logodesktopwidth = \theme_essential\toolbox::get_setting('logodesktopwidth');
+    $logomobilewidth = \theme_essential\toolbox::get_setting('logomobilewidth');
+    $css = \theme_essential\toolbox::set_integer($css, 'logodesktopwidth', $logodesktopwidth, 25);
+    $css = \theme_essential\toolbox::set_integer($css, 'logomobilewidth', $logomobilewidth, 10);
 
-    // Set the logo width and height.
-    $logowidth = \theme_essential\toolbox::get_setting('logowidth');
-    $logoheight = \theme_essential\toolbox::get_setting('logoheight');
-    $css = \theme_essential\toolbox::set_logodimensions($css, $logowidth, $logoheight);
+    // Set the dropdown menu maximum height.
+    $dropdownmenumaxheight = \theme_essential\toolbox::get_setting('dropdownmenumaxheight');
+    $css = \theme_essential\toolbox::set_integer($css, 'dropdownmenumaxheight', $dropdownmenumaxheight, 384);
 
     // Set the background image for the header.
     $headerbackground = \theme_essential\toolbox::setting_file_url('headerbackground', 'headerbackground');
@@ -465,6 +472,14 @@ function theme_essential_process_css($css, $theme) {
     $loginbgstyle = \theme_essential\toolbox::get_setting('loginbackgroundstyle');
     $loginbgopacity = \theme_essential\toolbox::get_setting('loginbackgroundopacity');
     $css = \theme_essential\toolbox::set_loginbackgroundstyle($css, $loginbgstyle, $loginbgopacity);
+
+    // Set the user image border radius.
+    $userimageborderradius = \theme_essential\toolbox::get_setting('userimageborderradius');
+    $css = \theme_essential\toolbox::set_integer($css, 'userimageborderradius', $userimageborderradius, 90);
+
+    // Set the user menu user image border radius.
+    $usermenuuserimageborderradius = \theme_essential\toolbox::get_setting('usermenuuserimageborderradius');
+    $css = \theme_essential\toolbox::set_integer($css, 'usermenuuserimageborderradius', $usermenuuserimageborderradius, 4);
 
     // Set marketing height.
     $marketingheight = \theme_essential\toolbox::get_setting('marketingheight');

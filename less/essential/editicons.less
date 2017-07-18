@@ -15,15 +15,14 @@
 }
 
 .commands .@{fa-css-prefix} {
-    margin-left: 3px;
-    margin-right: 3px;
+    padding-right: 6px;
 }
 
 .menu a.menu-action,
 .course-item-actions a,
 .actions a {
     > .@{fa-css-prefix} {
-        width: 15px;
+        width: 16px;
     }
     &.action-delete {
         > .@{fa-css-prefix} {
@@ -32,54 +31,17 @@
     }
 }
 
-.actions a {
-    &.editing_groupsnone > .@{fa-css-prefix}:before {
-        content: "\f007";
-    }
-    &.editing_groupsseparate > .@{fa-css-prefix}:before {
-        content: "\f21b";
-    }
-    &.editing_groupsvisible > .@{fa-css-prefix}:before {
-        content: "\f234";
-    }
-}
-
 a.action-icon,
 #studentheader,
 .heading_name_row a {
     > .@{fa-css-prefix} {
         width: 14px;
-        margin: 0px 3px;
+        margin: 0 3px;
     }
 }
 
 .menu a.menu-action:hover > .@{fa-css-prefix} {
     color: @white;
-}
-
-.section-modchooser-link {
-    img {
-        display: none;
-    }
-
-    > a:before {
-        font-family: 'FontAwesome';
-        content: "\f067";
-    }
-
-    > a:hover:before {
-        text-decoration: none;
-    }
-}
-.dir-ltr .section-modchooser-link {
-    > a:before {
-        margin-right: 3px;
-    }
-}
-.dir-rtl .section-modchooser-link {
-    > a:before {
-        margin-left: 3px;
-    }
 }
 
 .editing_title {
@@ -88,80 +50,18 @@ a.action-icon,
     }
 
     &:before {
+        content: "\f040";
         font-family: 'FontAwesome';
-        content: "\f040 ";
-    }
-}
-.dir-ltr .editing_title {
-    &:before {
         margin-right: 5px;
     }
 }
-.dir-rtl .editing_title {
-    &:before {
-        margin-left: 5px;
-    }
-}
 
-.moodle-core-dragdrop-draghandle:before {
-    font-family: 'FontAwesome';
-    content: "\f047";
-    cursor: move;
-}
-.dir-ltr .moodle-core-dragdrop-draghandle:before {
-    margin-right: 5px;
-}
-.dir-rtl .moodle-core-dragdrop-draghandle:before {
-    margin-left: 5px;
-}
-
-.course-content .section .moodle-core-dragdrop-draghandle {
-    &:before {
-        font-family: 'FontAwesome';
-        content: "\f07d";
-        font-size: 1.4em;
-        padding-left: 5px;
-        padding-right: 5px;
-        cursor: n-resize;
-    }
-    img {
-        display: none;
-    }
-}
-.dir-ltr .course-content .section .moodle-core-dragdrop-draghandle {
-    &:before {
-        margin-right: 0;
-    }
-}
-.dir-rtl .course-content .section .moodle-core-dragdrop-draghandle {
-    &:before {
+.moodle-actionmenu.show[data-enhanced] .menu a {
+    padding-left: 0.35em;
+    padding-right: 0.35em;
+    .@{fa-css-prefix} {
         margin-left: 0;
-    }
-}
-
-.section .summary {
-    > a:before {
-        font-family: 'FontAwesome';
-        content: "\f013";
         margin-right: 5px;
-    }
-    .iconsmall.edit {
-        display: none;
-    }
-}
-
-.dir-ltr .moodle-actionmenu.show[data-enhanced] .menu a {
-    padding-left: 0.35em;
-    padding-right: 0.35em;
-    .@{fa-css-prefix} {
-        margin-right: 5px;
-    }
-}
-.dir-rtl .moodle-actionmenu.show[data-enhanced] .menu a {
-    padding-left: 0.35em;
-    padding-right: 0.35em;
-    .@{fa-css-prefix} {
-        margin-left: 5px;
     }
 }
 

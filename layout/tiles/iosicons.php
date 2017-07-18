@@ -24,6 +24,8 @@
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+defined('MOODLE_INTERNAL') || die;
+
 if (\theme_essential\toolbox::get_setting('iphoneicon')) {
     $iphoneicon = \theme_essential\toolbox::get_setting('iphoneicon', 'format_file_url');
 } else {
@@ -46,7 +48,7 @@ if (\theme_essential\toolbox::get_setting('ipadretinaicon')) {
 }
 ?>
 
-<link rel="apple-touch-icon-precomposed" sizes="57x57" href="<?php echo $iphoneicon ?>"/>
-<link rel="apple-touch-icon-precomposed" sizes="72x72" href="<?php echo $ipadicon ?>"/>
-<link rel="apple-touch-icon-precomposed" sizes="114x114" href="<?php echo $iphoneretinaicon ?>"/>
-<link rel="apple-touch-icon-precomposed" sizes="144x144" href="<?php echo $ipadretinaicon ?>"/>
+<link rel="apple-touch-icon" sizes="57x57" href="<?php echo $iphoneicon ?>"/>
+<link rel="apple-touch-icon" sizes="72x72" href="<?php echo $ipadicon ?>"/>
+<link rel="apple-touch-icon" sizes="114x114" href="<?php echo $iphoneretinaicon ?>"/>
+<link rel="apple-touch-icon" sizes="144x144" href="<?php echo $ipadretinaicon ?>"/>

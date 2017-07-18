@@ -10,37 +10,36 @@
         padding: 0 5px;
     }
 }
-.dir-ltr #course-category-listings {
+#course-category-listings {
     li {
         // Tree item indenting to represent depth.
-        i.icon {margin-left:0;}
-        li i.icon {margin-left:1em;}
-        li li i.icon {margin-left:2em;}
-        li li li i.icon {margin-left:3em;}
-        li li li li i.icon {margin-left:4em;}
-        li li li li li i.icon {margin-left:4.5em;}
-        li li li li li li i.icon {margin-left:5em;}
-        li li li li li li li i.icon {margin-left:5.5em;}
+        i.icon {
+            margin-left: 0;
+        }
+        li i.icon {
+            margin-left: 1em;
+        }
+        li li i.icon {
+            margin-left: 2em;
+        }
+        li li li i.icon {
+            margin-left: 3em;
+        }
+        li li li li i.icon {
+            margin-left: 4em;
+        }
+        li li li li li i.icon {
+            margin-left: 4.5em;
+        }
+        li li li li li li i.icon {
+            margin-left: 5em;
+        }
+        li li li li li li li i.icon {
+            margin-left: 5.5em;
+        }
         .menu li i.icon {
             // Do not affect the menu icon. 
             margin-left: 0;
-        }
-    }
-}
-.dir-rtl #course-category-listings {
-    li {
-        // Tree item indenting to represent depth.
-        i.icon {margin-right:0;}
-        li i.icon {margin-right:1em;}
-        li li i.icon {margin-right:2em;}
-        li li li i.icon {margin-right:3em;}
-        li li li li i.icon {margin-right:4em;}
-        li li li li li i.icon {margin-right:4.5em;}
-        li li li li li li i.icon {margin-right:5em;}
-        li li li li li li li i.icon {margin-right:5.5em;}
-        .menu li i.icon {
-            // Do not affect the menu icon. 
-            margin-right: 0;
         }
     }
 }
@@ -50,9 +49,6 @@ div.mdl-align.title {
     border-bottom: 1px solid #e1e1e1;
     margin-bottom: 15px;
 }
-.dir-rtl div.mdl-align.title {
-    text-align: right;
-}
 
 .course-content ul li.section.main.current {
     border-radius: 5px;
@@ -60,7 +56,7 @@ div.mdl-align.title {
 
 .course-content ul li.section.hidden {
     .sectionname > span,
-    .content > div,  /* All the divs but the activities which are in a UL. */
+    .content > div, /* All the divs but the activities which are in a UL. */
     .activity .activityinstance {
         opacity: 1;
         color: @grayLight;
@@ -120,47 +116,22 @@ body {
         text-decoration: none;
     }
 }
-.dir-ltr .coursebox > .info > .coursename a {
+.coursebox > .info > .coursename a {
     background-position: left 0;
     padding-left: 0;
     &:before {
         margin-right: 5px;
     }
 }
-.dir-rtl .coursebox > .info > .coursename a {
-    background-position: right 0;
-    padding-right: 0;
-    &:before {
-        margin-left: 5px;
-    }
-}
 
-.dir-ltr .listitem-category {
+.listitem-category {
     .icon {
         margin-right: 5px;
         margin-left: 3px;
     }
 }
-.dir-rtl .listitem-category {
-    .icon {
-        margin-left: 5px;
-        margin-right: 3px;
-    }
-}
 
 .editing {
-    .section {
-        .activity {
-            .editing_hide .@{fa-css-prefix}-eye-slash:before {
-                content: "\f06e";
-            }
-            .editing_show .@{fa-css-prefix}-eye:before {
-                content: "\f070";
-            }
-        }
-    }
-}
-.dir-ltr.editing {
     .section {
         .activity {
             .activityinstance {
@@ -172,20 +143,8 @@ body {
         }
     }
 }
-.dir-rtl.editing {
-    .section {
-        .activity {
-            .activityinstance {
-                padding-left: 180px;
-            }
-            .contentwithoutlink {
-                padding-left: 100px;
-            }
-        }
-    }
-}
 
-.dir-ltr .modeditingmenu.editing {
+.modeditingmenu.editing {
     .section {
         .activity {
             .activityinstance {
@@ -194,18 +153,11 @@ body {
         }
     }
 }
-.dir-rtl .modeditingmenu.editing {
-    .section {
-        .activity {
-            .activityinstance {
-                padding-left: 80px;
-            }
-        }
-    }
-}
 
 .coursebox .content {
-    .summary, .courseimage, .teachers {
+    .summary,
+    .courseimage,
+    .teachers {
         // Class 'fullsummarywidth' is an Essential special in the overridded core_course_renderer.php.
         &.fullsummarywidth {
             width: 100%;
@@ -220,18 +172,11 @@ body {
         max-height: none;
     }
 }
-.dir-ltr .coursebox .content {
+.coursebox .content {
     .teachers.courseboxright {
         // Class 'courseboxright' is an Essential special in the overridded core_course_renderer.php.
         float: right;
         clear: right;
-    }
-}
-.dir-rtl .coursebox .content {
-    .teachers.courseboxright {
-        // Class 'courseboxright' is an Essential special in the overridded core_course_renderer.php.
-        float: left;
-        clear: left;
     }
 }
 /* @group Course Resource */
@@ -271,30 +216,17 @@ body {
         width: 74.05%;
     }
 }
-.dir-ltr #next_section {
+#next_section {
     text-align: right;
     float: right;
     .nav_icon {
+        border-left: 1px solid #eee;
         float: right;
         margin-left: 0.3em;
-        border-left: 1px solid #eee;
     }
 
     .text {
         float: right;
-    }
-}
-.dir-rtl #next_section {
-    text-align: left;
-    float: left;
-    .nav_icon {
-        float: left;
-        margin-right: 0.3em;
-        border-right: 1px solid #eee;
-    }
-
-    .text {
-        float: left;
     }
 }
 
@@ -307,45 +239,31 @@ body {
         width: 74.05%;
     }
 }
-.dir-ltr #previous_section {
+#previous_section {
     float: left;
     text-align: left;
 
     .nav_icon {
+        border-right: 1px solid #eee;
         float: left;
         margin-right: 0.3em;
-        border-right: 1px solid #eee;
     }
 
     .text {
         float: left;
-    }
-}
-.dir-rtl #previous_section {
-    float: right;
-    text-align: right;
-
-    .nav_icon {
-        float: right;
-        margin-left: 0.3em;
-        border-left: 1px solid #eee;
-    }
-
-    .text {
-        float: right;
     }
 }
 
 .nav_guide {
+    font-style: normal;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    font-style: normal;
 }
 
 .nav_icon {
     padding: 0.3em;
-    width: 8.3%;
     text-align: center;
+    width: 8.3%;
 }
 
 /* @end */

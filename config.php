@@ -18,12 +18,16 @@
  * Essential is a clean and customizable theme.
  *
  * @package     theme_essential
+ * @copyright   2017 Gareth J Barnard
  * @copyright   2016 Gareth J Barnard
  * @copyright   2015 Gareth J Barnard
  * @copyright   2014 Gareth J Barnard, David Bezemer
  * @copyright   2013 Julian Ridden
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
+defined('MOODLE_INTERNAL') || die;
+
 $THEME->name = 'essential';
 
 $THEME->doctype = 'html5';
@@ -31,10 +35,10 @@ $THEME->yuicssmodules = array();
 $THEME->parents = array('bootstrapbase');
 $THEME->parents_exclude_sheets = array('bootstrapbase' => array('moodle', 'editor'));
 
+$THEME->sheets[] = 'fontawesome';
 $THEME->sheets[] = 'essential';
 $THEME->sheets[] = 'bootstrap-pix';
 $THEME->sheets[] = 'essential-settings';
-$THEME->sheets[] = 'fontawesome';
 
 if ((get_config('theme_essential', 'enablealternativethemecolors1')) ||
         (get_config('theme_essential', 'enablealternativethemecolors2')) ||
@@ -49,8 +53,6 @@ if (get_config('theme_essential', 'customscrollbars')) {
 }
 
 $THEME->sheets[] = 'custom';
-
-$THEME->plugins_exclude_sheets = array('mod' => array('assign'));
 
 $THEME->supportscssoptimisation = false;
 
@@ -72,13 +74,18 @@ if (get_config('theme_essential', 'haveheaderblock') > 0) {
     $baseregions[] = 'header';
     $fpaddregions[] = 'header';
 }
-$standardregions = array_merge(array('side-pre', 'page-top'), $baseregions);
+$onecolumnregions = array_merge($baseregions);
+$standardregions = array_merge(array('side-pre'), $baseregions);
+if (get_config('theme_essential', 'pagetopblocks')) {
+    $onecolumnregions[] = 'page-top';
+    $standardregions[] = 'page-top';
+}
 
 $THEME->layouts = array(
     // Most backwards compatible layout without the blocks - this is the layout used by default.
     'base' => array(
         'file' => 'columns1.php',
-        'regions' => $baseregions,
+        'regions' => $onecolumnregions,
         'defaultregion' => 'footer-middle',
     ),
     // Front page.
@@ -164,7 +171,7 @@ $THEME->layouts = array(
     // Should display the content and basic headers only.
     'print' => array(
         'file' => 'columns1.php',
-        'regions' => $baseregions,
+        'regions' => $onecolumnregions,
         'defaultregion' => '',
         'options' => array('nofooter' => true),
     ),
@@ -190,3 +197,5 @@ $THEME->layouts = array(
 
 $THEME->rendererfactory = 'theme_overridden_renderer_factory';
 $THEME->csspostprocess = 'theme_essential_process_css';
+
+$THEME->iconsystem = '\\theme_essential\\output\\icon_system_fontawesome';

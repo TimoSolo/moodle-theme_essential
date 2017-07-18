@@ -20,7 +20,7 @@
  * @package    theme
  * @subpackage essential
  * @copyright  &copy; 2016-onwards G J Barnard.
- * @author     G J Barnard - gjbarnard at gmail dot com and {@link http://moodle.org/user/profile.php?id=442195}
+ * @author     G J Barnard - {@link http://moodle.org/user/profile.php?id=442195}
  * @license    PHP Code: http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later.
  * @license    Source HTML Code: http://www.apache.org/licenses/LICENSE-2.0 Apache License v2.0:
  *
@@ -42,6 +42,9 @@
  *
  * Content source reference: http://getbootstrap.com/2.3.2/base-css.html.
  */
+
+defined('MOODLE_INTERNAL') || die;
+
 class essential_admin_setting_styleguide extends admin_setting {
 
     /**
@@ -7110,7 +7113,7 @@ class essential_admin_setting_styleguide extends admin_setting {
         $return .= '</ol>';
         $return .= '<div class="carousel-inner">';
         $return .= '<div class="item active">';
-        $return .= '<img src="'.$OUTPUT->pix_url('screenshot', 'theme').'" alt="">';
+        $return .= '<img src="'.$OUTPUT->image_url('screenshot', 'theme').'" alt="">';
         $return .= '<div class="carousel-caption">';
         $return .= '<h4>First Thumbnail label</h4>';
         $return .= '<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida ';
@@ -7118,7 +7121,7 @@ class essential_admin_setting_styleguide extends admin_setting {
         $return .= '</div>';
         $return .= '</div>';
         $return .= '<div class="item">';
-        $return .= '<img src="'.$OUTPUT->pix_url('screenshot', 'theme').'" alt="">';
+        $return .= '<img src="'.$OUTPUT->image_url('screenshot', 'theme').'" alt="">';
         $return .= '<div class="carousel-caption">';
         $return .= '<h4>Second Thumbnail label</h4>';
         $return .= '<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida ';
@@ -7126,7 +7129,7 @@ class essential_admin_setting_styleguide extends admin_setting {
         $return .= '</div>';
         $return .= '</div>';
         $return .= '<div class="item">';
-        $return .= '<img src="'.$OUTPUT->pix_url('screenshot', 'theme').'" alt="">';
+        $return .= '<img src="'.$OUTPUT->image_url('screenshot', 'theme').'" alt="">';
         $return .= '<div class="carousel-caption">';
         $return .= '<h4>Third Thumbnail label</h4>';
         $return .= '<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida ';

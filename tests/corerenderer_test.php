@@ -20,10 +20,12 @@
  * @package    theme
  * @subpackage essential
  * @copyright  &copy; 2015-onwards G J Barnard in respect to modifications of the Bootstrap theme.
- * @author     G J Barnard - gjbarnard at gmail dot com and {@link http://moodle.org/user/profile.php?id=442195}
+ * @author     G J Barnard - {@link http://moodle.org/user/profile.php?id=442195}
  * @author     Based on code originally written by Bas Brands, David Scotson and many other contributors.
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+
+defined('MOODLE_INTERNAL') || die;
 
 /**
  * Core renderer unit tests for the Essential theme.
@@ -65,7 +67,8 @@ class theme_essential_corerenderer_testcase extends advanced_testcase {
     public function test_pix() {
         $ouricon = \theme_essential\toolbox::pix_url('essential_button', 'theme');
 
-        $this->assertEquals('http://www.example.com/moodle/theme/image.php/_s/essential/theme/1/essential_button',
+        global $CFG;
+        $this->assertEquals($CFG->wwwroot.'/theme/image.php/_s/essential/theme/1/essential_button',
             $ouricon->out(false));
     }
 }

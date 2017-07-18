@@ -27,12 +27,14 @@
             }
         }
     }
-    
-    [data-region=review-panel], [data-region=grade-panel] {
-        top: 100px;
+
+    [data-region=review-panel],
+    [data-region=grade-panel] {
+        top: 126px;
     }
 
-    [data-region=grade-actions], [data-region=grade-actions-panel] {
+    [data-region=grade-actions],
+    [data-region=grade-actions-panel] {
         background-color: @white;
     }
 }
@@ -42,31 +44,23 @@
         [data-region=grading-navigation-panel] {
             height: auto;
         }
-        [data-region=review-panel], [data-region=grade-panel] {
+        [data-region=review-panel],
+        [data-region=grade-panel] {
             top: 0;
         }
-        [data-region=user-info], [data-region=assignment-info] {
+        [data-region=user-info],
+        [data-region=assignment-info] {
             display: inline !important;
             width: 50%;
         }
         [data-region=user-selector] .alignment {
             width: 100%;
         }
-    }
-    .dir-ltr.path-mod-assign {
         [data-region=user-info] {
             float: left;
         }
         [data-region=assignment-info] {
             float: right;
-        }
-    }
-    .dir-rtl.path-mod-assign {
-        [data-region=user-info] {
-            float: right;
-        }
-        [data-region=assignment-info] {
-            float: left;
         }
     }
 }

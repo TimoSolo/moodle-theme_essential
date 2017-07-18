@@ -3,6 +3,8 @@
  * @copyright   2014 Gareth J Barnard, David Bezemer
  * @license     http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
+/*! Essential lint disable */
+/* Disabling as already linted in the LESS. */
 /* @group Alerts */
 .alert .fa-info {
   background-color: #3a87ad;
@@ -50,14 +52,14 @@
 /* @end */
 /* @group Autocomplete */
 .ui-autocomplete {
-  background-color: #ffffff;
+  background-color: #fff;
   border-color: [[setting:themecolor]];
   -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
 }
 .ui-autocomplete-loading {
-  background: #ffffff url('[[pix:i/loading_small]]') right center no-repeat;
+  background: white url('[[pix:i/loading_small]]') right center no-repeat;
 }
 .ui-autocomplete .ui-menu-item {
   color: [[setting:themetextcolor]];
@@ -76,9 +78,6 @@
 /* @end */
 /* @group Blocks */
 .block .icon {
-  color: [[setting:themeiconcolor]];
-}
-.block .moodle-core-dragdrop-draghandle:before {
   color: [[setting:themeiconcolor]];
 }
 .block .menu a.menu-action {
@@ -199,12 +198,6 @@ p.tree_item.branch.emptybranch:focus:before {
 }
 .breadcrumb-nav ul.breadcrumb.style1 li:hover:after a {
   color: [[setting:themecolor]];
-}
-.dir-rtl .breadcrumb-nav ul.breadcrumb.style1 li:after {
-  border-right-color: [[setting:themecolor]];
-}
-.dir-rtl .breadcrumb-nav ul.breadcrumb.style1 li:hover:after {
-  border-right-color: [[setting:themenavcolor]];
 }
 /* @end */
 /* @group Breadcrumb Style Simple */
@@ -450,18 +443,28 @@ a.marketing-button:hover {
 }
 /* @end */
 /* @group Core */
+img.userpicture,
+img.profilepicture {
+  border-color: [[setting:themecolor]];
+  border-radius: [[setting:userimageborderradius]]px;
+  box-shadow: 0 0 3px [[setting:themecolor]];
+}
 .moodle-actionmenu[data-enhanced].show .menu {
-  background-color: #ffffff;
+  background-color: #fff;
 }
 .moodle-actionmenu[data-enhanced].show .menu a {
   color: [[setting:themeurlcolor]];
 }
 .moodle-actionmenu[data-enhanced].show .menu a:hover {
-  color: #ffffff;
+  color: #fff;
   background-color: [[setting:themeurlcolor]];
 }
 .moodle-actionmenu[data-enhanced].show .menu a:hover .fa:before {
-  color: #ffffff;
+  color: #fff;
+}
+.moodle-actionmenu[data-enhanced].show .menu a:hover img {
+  background-color: #fff;
+  border-radius: 4px;
 }
 /* @end */
 /* @group Course */
@@ -586,9 +589,6 @@ body.has_dock.essential-colours-alternative4 #dock .dockedtitle[disabled] {
 .actions a:hover > .fa {
   color: [[setting:themehovercolor]];
 }
-.section-modchooser-link > a:before {
-  color: [[setting:themeiconcolor]];
-}
 /* @end */
 /* @Group Editor */
 #tinymce {
@@ -637,7 +637,8 @@ body.has_dock.essential-colours-alternative4 #dock .dockedtitle[disabled] {
 #tinymce .color {
   color: [[setting:themecolor]];
 }
-body .editor_atto_content_wrap {
+body .editor_atto_content_wrap,
+div.editor_atto_toolbar button .icon {
   color: [[setting:themetextcolor]];
 }
 /* @end */
@@ -902,13 +903,8 @@ body#page-grade-grading-pick #region-main form #fgroup_id_buttonar label {
 #page-header {
   color: [[setting:headertextcolor]];
 }
-#page-header.logo {
-  height: [[setting:logoheight]];
-  max-height: [[setting:logoheight]];
-}
-#page-header.nologo {
-  height: 52px;
-  max-height: 52px;
+#page-header .logo-container {
+  width: [[setting:logomobilewidth]]%;
 }
 #page-header h1#title {
   color: [[setting:headertextcolor]];
@@ -925,21 +921,12 @@ body#page-grade-grading-pick #region-main form #fgroup_id_buttonar label {
 #page-header .btn-icon .icon-bar {
   background-color: [[setting:themecolor]];
 }
-#page-header a.logo {
-  background-image: [[setting:logo]];
-  height: [[setting:logoheight]];
-  width: [[setting:logowidth]];
-}
-.dir-ltr #page-header div.titlearea {
+#page-header div.titlearea {
   border-left: 1px dotted [[setting:themecolor]];
 }
-.dir-rtl #page-header div.titlearea {
-  border-right: 1px dotted [[setting:themecolor]];
-}
 @media (min-width: 980px) {
-  #page-header.nologo {
-    height: 64px;
-    max-height: 64px;
+  #page-header .logo-container {
+    width: [[setting:logodesktopwidth]]%;
   }
 }
 /* @end */
@@ -949,33 +936,16 @@ button.website:focus {
   background-color: [[setting:themecolor]];
 }
 .socials {
-  margin: 0px;
+  margin: 0;
 }
 .socials p {
   color: [[setting:headertextcolor]];
 }
-.dir-ltr #mobileapps {
+#mobileapps {
   border-right: 1px dotted [[setting:themecolor]];
-}
-.dir-rtl #mobileapps {
-  border-left: 1px dotted [[setting:themecolor]];
 }
 /* @end */
 /* @group Navbar */
-#essentialnavbar.oldnavbar.logo {
-  top: [[setting:logoheight]];
-}
-#essentialnavbar.oldnavbar.nologo {
-  top: 52px;
-}
-@media (min-width: 980px) {
-  #essentialnavbar.oldnavbar.nologo {
-    top: 64px;
-  }
-}
-#essentialnavbar.affix.oldnavbar {
-  top: 0;
-}
 .navbar .navbar-inner .brand {
   color: [[setting:themenavcolor]];
 }
@@ -1006,43 +976,36 @@ button.website:focus {
   color: [[setting:themeurlcolor]];
 }
 .navbar .navbar-inner .nav > li.dropdown .dropdown-menu li > a:hover {
-  color: #ffffff;
+  color: #fff;
   background-color: [[setting:themeurlcolor]];
 }
 .navbar .navbar-inner .nav > li.dropdown .dropdown-menu li > a:focus,
 .navbar .navbar-inner .nav > li.dropdown .dropdown-menu li > a.open {
-  color: #ffffff;
+  color: #fff;
   background-color: [[setting:themeurlcolor]];
 }
 .navbar .navbar-inner .nav > li.dropdown .dropdown-menu li > a:focus .fa,
 .navbar .navbar-inner .nav > li.dropdown .dropdown-menu li > a.open .fa {
-  color: #ffffff;
+  color: #fff;
 }
 .navbar .navbar-inner .nav > li.dropdown .dropdown-menu li > a:hover .dimmed_text {
-  color: #eeeeee;
+  color: #eee;
 }
 .navbar .navbar-inner .nav > li.dropdown .dropdown-menu li.dropdown-submenu:hover > a {
-  color: #ffffff;
+  color: #fff;
   background-color: [[setting:themeurlcolor]];
 }
 .navbar .navbar-inner .nav > li.dropdown .dropdown-menu li.dropdown-submenu:hover > a .fa {
   color: inherit;
 }
-.navbar .navbar-inner #custom_menu_courses .nav > li.dropdown .dropdown-menu li > a:hover > span {
-  background-color: [[setting:themeurlcolor]];
-}
-.navbar .navbar-inner #custom_menu_courses .nav > li.dropdown .dropdown-menu li > a:focus > span,
-.navbar .navbar-inner #custom_menu_courses .nav > li.dropdown .dropdown-menu li > a.open > span {
-  background-color: [[setting:themeurlcolor]];
-}
 .navbar .navbar-inner .nav li.dropdown.open > .dropdown-toggle,
 .navbar .navbar-inner .nav li.dropdown.active > .dropdown-toggle,
 .navbar .navbar-inner .nav li.dropdown.open.active > .dropdown-toggle {
-  color: #ffffff;
+  color: #fff;
   background-color: [[setting:themehovercolor]];
 }
 .navbar .navbar-inner .usermenu .dropdown img.userpicture {
-  border: 1px solid [[setting:themenavcolor]];
+  border-radius: [[setting:usermenuuserimageborderradius]]px;
 }
 .navbar .navbar-inner .usermenu .dropdown .dropdown-menu {
   border: 1px solid [[setting:themecolor]];
@@ -1050,29 +1013,27 @@ button.website:focus {
 .navbar .navbar-inner .usermenu .dropdown .dropdown-menu hr.sep {
   border-bottom: 1px dotted [[setting:themecolor]];
 }
-.navbar .navbar-inner .messagemenu ul.nav .dropdown-menu {
-  border: 1px solid [[setting:themecolor]];
+.navbar .navbar-inner .popover-region-toggle {
+  color: [[setting:themenavcolor]];
 }
-.navbar .navbar-inner .messagemenu ul.nav .dropdown-menu li > a {
-  border-top: 1px dotted [[setting:themecolor]];
+.navbar .navbar-inner .popover-region-toggle:hover,
+.navbar .navbar-inner .popover-region-toggle:focus {
+  color: [[setting:themecolor]];
+  background-color: [[setting:themenavcolor]];
 }
-.navbar .navbar-inner .messagemenu ul.nav .dropdown-menu li > a:hover .message,
-.navbar .navbar-inner .messagemenu ul.nav .dropdown-menu li > a:hover .notification {
-  color: #ffffff;
-  background-color: [[setting:themehovercolor]];
-}
-.navbar .navbar-inner .messagemenu ul.nav .dropdown-menu li > a:hover .message img.userpicture,
-.navbar .navbar-inner .messagemenu ul.nav .dropdown-menu li > a:hover .notification img.userpicture,
-.navbar .navbar-inner .messagemenu ul.nav .dropdown-menu li > a:hover .message img.profilepicture,
-.navbar .navbar-inner .messagemenu ul.nav .dropdown-menu li > a:hover .notification img.profilepicture {
-  box-shadow: 0 0 3px [[setting:themenavcolor]];
-}
-.navbar-inner .nav .dropdown-menu .dropdown-submenu .dropdown-toggle:after {
+.dropdown-submenu > a:after {
   border-left-color: [[setting:themeiconcolor]];
 }
-.navbar-inner .nav .dropdown-menu .dropdown-submenu:focus .dropdown-toggle:after,
-.navbar-inner .nav .dropdown-menu .dropdown-submenu:hover .dropdown-toggle:after {
+.dropdown-submenu:focus > a:after,
+.dropdown-submenu:hover > a:after {
   border-left-color: [[setting:themenavcolor]];
+}
+.navbar .navbar-inner .usermenu .dropdown .dropdown-submenu > a:after {
+  border-right-color: [[setting:themeiconcolor]];
+}
+.navbar .navbar-inner .usermenu .dropdown .dropdown-submenu:focus > a:after,
+.navbar .navbar-inner .usermenu .dropdown .dropdown-submenu:hover > a:after {
+  border-right-color: [[setting:themenavcolor]];
 }
 @media (max-width: 979px) {
   .navbar .nav-collapse.in .nav .dropdown-submenu .dropdown-toggle:after,
@@ -1098,14 +1059,14 @@ button.website:focus {
   .navbar .nav-collapse.in .nav .dropdown-menu .dropdown-submenu:hover.open > a.dropdown-toggle:after {
     border-top-color: [[setting:themenavcolor]];
   }
-  .dir-ltr .navbar .nav-collapse.in .nav .dropdown-submenu .dropdown-toggle:after,
-  .dir-ltr .navbar .nav-collapse.in .nav .dropdown-menu .dropdown-submenu .dropdown-toggle:after {
+  .navbar .nav-collapse.in .nav .dropdown-submenu .dropdown-toggle:after,
+  .navbar .nav-collapse.in .nav .dropdown-menu .dropdown-submenu .dropdown-toggle:after {
     border-left-color: transparent;
   }
-  .dir-rtl .navbar .nav-collapse.in .nav .dropdown-submenu .dropdown-toggle:after,
-  .dir-rtl .navbar .nav-collapse.in .nav .dropdown-menu .dropdown-submenu .dropdown-toggle:after {
-    border-right-color: transparent;
-  }
+}
+.dropdownmenuscroll div.dropdown-menu > ul,
+.dropdownsubmenuscroll li.dropdown-submenu > ul {
+  max-height: [[setting:dropdownmenumaxheight]]px;
 }
 /* @end */
 /* @group Print Styling */
@@ -1181,7 +1142,7 @@ button.website:focus {
   color: [[setting:themetextcolor]];
 }
 .path-grade-report-grader .gradeparent .user.cell .userpicture {
-  background-color: #ffffff;
+  background-color: #fff;
 }
 table#explaincaps tbody > tr:nth-child(odd) > td,
 table#defineroletable tbody > tr:nth-child(odd) > td,
@@ -1504,30 +1465,30 @@ table.flexible tbody > tr:nth-child(odd) > td .fa:focus,
 .generaltable tbody > tr:nth-child(odd) > td .fa:focus {
   color: inherit;
 }
-table#explaincaps tbody > tr:nth-child(odd) > td img.userpicture,
-table#defineroletable tbody > tr:nth-child(odd) > td img.userpicture,
-table.grading-report tbody > tr:nth-child(odd) > td img.userpicture,
-table#listdirectories tbody > tr:nth-child(odd) > td img.userpicture,
-table.rolecaps tbody > tr:nth-child(odd) > td img.userpicture,
-table.userenrolment tbody > tr:nth-child(odd) > td img.userpicture,
-table#form tbody > tr:nth-child(odd) > td img.userpicture,
-form#movecourses table tbody > tr:nth-child(odd) > td img.userpicture,
-#page-admin-course-index .editcourse tbody > tr:nth-child(odd) > td img.userpicture,
-.forumheaderlist tbody > tr:nth-child(odd) > td img.userpicture,
-table.flexible tbody > tr:nth-child(odd) > td img.userpicture,
-.generaltable tbody > tr:nth-child(odd) > td img.userpicture,
-table#explaincaps tbody > tr:nth-child(odd) > td img.profilepicture,
-table#defineroletable tbody > tr:nth-child(odd) > td img.profilepicture,
-table.grading-report tbody > tr:nth-child(odd) > td img.profilepicture,
-table#listdirectories tbody > tr:nth-child(odd) > td img.profilepicture,
-table.rolecaps tbody > tr:nth-child(odd) > td img.profilepicture,
-table.userenrolment tbody > tr:nth-child(odd) > td img.profilepicture,
-table#form tbody > tr:nth-child(odd) > td img.profilepicture,
-form#movecourses table tbody > tr:nth-child(odd) > td img.profilepicture,
-#page-admin-course-index .editcourse tbody > tr:nth-child(odd) > td img.profilepicture,
-.forumheaderlist tbody > tr:nth-child(odd) > td img.profilepicture,
-table.flexible tbody > tr:nth-child(odd) > td img.profilepicture,
-.generaltable tbody > tr:nth-child(odd) > td img.profilepicture {
+table#explaincaps tbody > tr > td img.userpicture,
+table#defineroletable tbody > tr > td img.userpicture,
+table.grading-report tbody > tr > td img.userpicture,
+table#listdirectories tbody > tr > td img.userpicture,
+table.rolecaps tbody > tr > td img.userpicture,
+table.userenrolment tbody > tr > td img.userpicture,
+table#form tbody > tr > td img.userpicture,
+form#movecourses table tbody > tr > td img.userpicture,
+#page-admin-course-index .editcourse tbody > tr > td img.userpicture,
+.forumheaderlist tbody > tr > td img.userpicture,
+table.flexible tbody > tr > td img.userpicture,
+.generaltable tbody > tr > td img.userpicture,
+table#explaincaps tbody > tr > td img.profilepicture,
+table#defineroletable tbody > tr > td img.profilepicture,
+table.grading-report tbody > tr > td img.profilepicture,
+table#listdirectories tbody > tr > td img.profilepicture,
+table.rolecaps tbody > tr > td img.profilepicture,
+table.userenrolment tbody > tr > td img.profilepicture,
+table#form tbody > tr > td img.profilepicture,
+form#movecourses table tbody > tr > td img.profilepicture,
+#page-admin-course-index .editcourse tbody > tr > td img.profilepicture,
+.forumheaderlist tbody > tr > td img.profilepicture,
+table.flexible tbody > tr > td img.profilepicture,
+.generaltable tbody > tr > td img.profilepicture {
   background-color: rgba(255, 255, 255, 0.8);
 }
 table#explaincaps tbody > tr:nth-child(odd) > td h3,
@@ -1678,6 +1639,53 @@ table#permissions > tbody tr:hover > td a:not(.btn):not([role="menuitem"]):activ
   color: [[setting:themestripeurlcolour]];
   background-color: [[setting:themestripebackgroundcolour]];
 }
+.user-enroller-panel .uep-search-results .users > tbody tr:hover > td a:not(.btn):not([role="menuitem"]) .fa,
+.user-enroller-panel .uep-search-results .cohorts > tbody tr:hover > td a:not(.btn):not([role="menuitem"]) .fa,
+table.grading-report > tbody tr:hover > td a:not(.btn):not([role="menuitem"]) .fa,
+.forumheaderlist > tbody tr:hover > td a:not(.btn):not([role="menuitem"]) .fa,
+.generaltable > tbody tr:hover > td a:not(.btn):not([role="menuitem"]) .fa,
+table.flexible > tbody tr:hover > td a:not(.btn):not([role="menuitem"]) .fa,
+.category_subcategories > tbody tr:hover > td a:not(.btn):not([role="menuitem"]) .fa,
+table#modules > tbody tr:hover > td a:not(.btn):not([role="menuitem"]) .fa,
+table#permissions > tbody tr:hover > td a:not(.btn):not([role="menuitem"]) .fa,
+.user-enroller-panel .uep-search-results .users > tbody tr:hover > td a:not(.btn):not([role="menuitem"]):visited .fa,
+.user-enroller-panel .uep-search-results .cohorts > tbody tr:hover > td a:not(.btn):not([role="menuitem"]):visited .fa,
+table.grading-report > tbody tr:hover > td a:not(.btn):not([role="menuitem"]):visited .fa,
+.forumheaderlist > tbody tr:hover > td a:not(.btn):not([role="menuitem"]):visited .fa,
+.generaltable > tbody tr:hover > td a:not(.btn):not([role="menuitem"]):visited .fa,
+table.flexible > tbody tr:hover > td a:not(.btn):not([role="menuitem"]):visited .fa,
+.category_subcategories > tbody tr:hover > td a:not(.btn):not([role="menuitem"]):visited .fa,
+table#modules > tbody tr:hover > td a:not(.btn):not([role="menuitem"]):visited .fa,
+table#permissions > tbody tr:hover > td a:not(.btn):not([role="menuitem"]):visited .fa,
+.user-enroller-panel .uep-search-results .users > tbody tr:hover > td a:not(.btn):not([role="menuitem"]):hover .fa,
+.user-enroller-panel .uep-search-results .cohorts > tbody tr:hover > td a:not(.btn):not([role="menuitem"]):hover .fa,
+table.grading-report > tbody tr:hover > td a:not(.btn):not([role="menuitem"]):hover .fa,
+.forumheaderlist > tbody tr:hover > td a:not(.btn):not([role="menuitem"]):hover .fa,
+.generaltable > tbody tr:hover > td a:not(.btn):not([role="menuitem"]):hover .fa,
+table.flexible > tbody tr:hover > td a:not(.btn):not([role="menuitem"]):hover .fa,
+.category_subcategories > tbody tr:hover > td a:not(.btn):not([role="menuitem"]):hover .fa,
+table#modules > tbody tr:hover > td a:not(.btn):not([role="menuitem"]):hover .fa,
+table#permissions > tbody tr:hover > td a:not(.btn):not([role="menuitem"]):hover .fa,
+.user-enroller-panel .uep-search-results .users > tbody tr:hover > td a:not(.btn):not([role="menuitem"]):focus .fa,
+.user-enroller-panel .uep-search-results .cohorts > tbody tr:hover > td a:not(.btn):not([role="menuitem"]):focus .fa,
+table.grading-report > tbody tr:hover > td a:not(.btn):not([role="menuitem"]):focus .fa,
+.forumheaderlist > tbody tr:hover > td a:not(.btn):not([role="menuitem"]):focus .fa,
+.generaltable > tbody tr:hover > td a:not(.btn):not([role="menuitem"]):focus .fa,
+table.flexible > tbody tr:hover > td a:not(.btn):not([role="menuitem"]):focus .fa,
+.category_subcategories > tbody tr:hover > td a:not(.btn):not([role="menuitem"]):focus .fa,
+table#modules > tbody tr:hover > td a:not(.btn):not([role="menuitem"]):focus .fa,
+table#permissions > tbody tr:hover > td a:not(.btn):not([role="menuitem"]):focus .fa,
+.user-enroller-panel .uep-search-results .users > tbody tr:hover > td a:not(.btn):not([role="menuitem"]):active .fa,
+.user-enroller-panel .uep-search-results .cohorts > tbody tr:hover > td a:not(.btn):not([role="menuitem"]):active .fa,
+table.grading-report > tbody tr:hover > td a:not(.btn):not([role="menuitem"]):active .fa,
+.forumheaderlist > tbody tr:hover > td a:not(.btn):not([role="menuitem"]):active .fa,
+.generaltable > tbody tr:hover > td a:not(.btn):not([role="menuitem"]):active .fa,
+table.flexible > tbody tr:hover > td a:not(.btn):not([role="menuitem"]):active .fa,
+.category_subcategories > tbody tr:hover > td a:not(.btn):not([role="menuitem"]):active .fa,
+table#modules > tbody tr:hover > td a:not(.btn):not([role="menuitem"]):active .fa,
+table#permissions > tbody tr:hover > td a:not(.btn):not([role="menuitem"]):active .fa {
+  color: inherit;
+}
 /* @end */
 /* @group Settings */
 /* @group Core */
@@ -1701,7 +1709,7 @@ body .fa:hover {
   color: [[setting:themehovercolor]];
 }
 body .fa-inverse {
-  color: #ffffff;
+  color: #fff;
 }
 body .dimmed .fa {
   color: inherit;
@@ -1769,10 +1777,6 @@ a.dimmed:before {
   background-image: url([[pix:theme|bg/dot]]);
   background-repeat: repeat-x;
 }
-img.userpicture,
-img.profilepicture {
-  box-shadow: 0px 0px 3px [[setting:themecolor]];
-}
 /* @end */
 /* @end */
 /* @group Theme Colours Menu */
@@ -1820,12 +1824,6 @@ h2.pagetitle {
 }
 /* @end */
 /* @group Blocks */
-.block a {
-  color: [[setting:themeurlcolor]];
-}
-.block a:hover {
-  color: [[setting:themehovercolor]];
-}
 .block .header .title h2:before,
 .block.block_iconic_html .header .title h2 .fa:before {
   color: [[setting:themeiconcolor]];
@@ -1838,13 +1836,6 @@ h2.pagetitle {
 }
 .block_rss_client .footer a:hover {
   background-color: [[setting:themehovercolor]];
-}
-.block_login .content .footer a {
-  background-color: [[setting:themecolor]];
-  font-family: [[setting:bodyfont]];
-}
-.block_login .content .footer a:hover {
-  backgroundcolor: [[setting:themehovercolor]];
 }
 .block_login .content form input[type="submit"] {
   background-color: [[setting:themecolor]];
@@ -1918,9 +1909,6 @@ h2.pagetitle {
 #page-footer .block .icon {
   color: [[setting:footerblockurlcolour]];
 }
-#page-footer .block .moodle-core-dragdrop-draghandle:before {
-  color: [[setting:footerblockurlcolour]];
-}
 #page-footer .block .header {
   border-bottom: 1px solid [[setting:footersepcolor]];
 }
@@ -1948,7 +1936,7 @@ h2.pagetitle {
 /* @end */
 /* @group Profile Image */
 .socials img:hover {
-  box-shadow: 0px 0px 10px 0px [[setting:themecolor]];
+  box-shadow: 0 0 10px 0 [[setting:themecolor]];
 }
 /* @end */
 /* @group Tabs */
@@ -1963,7 +1951,7 @@ h2.pagetitle {
 }
 .nav-tabs > li.active > a {
   color: [[setting:themetextcolor]];
-  background-color: #ffffff;
+  background-color: #fff;
 }
 .nav-tabs > li.active > a:hover,
 .nav-tabs > li.active > a:focus {
@@ -1973,7 +1961,6 @@ h2.pagetitle {
 @media (max-width: 979px) {
   .nav-collapse {
     background-color: [[setting:themecolor]];
-    border: 1px solid [[setting:themecolor]];
   }
   .nav-collapse .nav > li a:hover,
   .nav-collapse .dropdown-menu a:hover,
@@ -1999,7 +1986,7 @@ h2.pagetitle {
 }
 .performanceinfo h2 {
   color: [[setting:footerblocktextcolour]];
-  border-bottom-color: #EEE;
+  border-bottom-color: #eee;
 }
 .performanceinfo h2:before {
   color: [[setting:themeiconcolor]];
@@ -2048,7 +2035,7 @@ table#user-grades th.courseitem {
   border-right-color: [[setting:themecolor]];
 }
 .path-grade-report-grader .grade_icons img {
-  background-color: #ffffff;
+  background-color: #fff;
   padding: 3px;
   border-radius: 3px;
 }
@@ -2070,8 +2057,7 @@ h5,
 h6,
 .back-to-top,
 .socials p,
-#profileheading,
-#socialheading,
+.socialheading,
 .forumpost .subject,
 .block_login label {
   font-family: [[setting:headingfont]];
@@ -2085,34 +2071,10 @@ h6 span {
   font-family: inherit;
 }
 /* @end */
-/* @group Editicons */
-.actions a {
-  color: [[setting:themeurlcolor]];
-}
-.actions a:hover,
-.actions a:focus,
-.actions a:active {
-  color: [[setting:themehovercolor]];
-}
-.actions .moodle-actionmenu[data-enhanced].show .menu a {
-  color: [[setting:themeurlcolor]];
-}
-.actions .moodle-actionmenu[data-enhanced].show .menu a:hover,
-.actions .moodle-actionmenu[data-enhanced].show .menu a:focus,
-.actions .moodle-actionmenu[data-enhanced].show .menu a:active {
-  color: [[setting:themehovercolor]];
-}
-.actions .moodle-actionmenu[data-enhanced].show .menu a:hover {
-  color: [[setting:themenavcolor]];
-  background-color: [[setting:themecolor]];
-}
-.actions .moodle-actionmenu[data-enhanced].show .menu a:hover .fa:before {
-  color: [[setting:themenavcolor]];
-}
-/* @end */
 /* @group Chat */
 #chat-input-area table.generaltable td.cell {
   background-color: [[setting:themecolor]] !important;
 }
 /* @end */
 /* @end */
+/*! Essential lint enable */

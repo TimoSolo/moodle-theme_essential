@@ -1,3 +1,98 @@
+New in 3.3.0.3
+==============
+- FIX: Issue #828: div id# completionprogressid has z-index.
+- FIX: Issue #830: Course page hides blocks in Flat Navigation and editing off.
+- FIX: Issue #831: User tour with backdrop alignment off - partial.
+- FIX: Issue #833: Help icons open a new tab.
+- FIX: Issue #835: Display fake blocks before Flat Navigation.
+- FIX: Issue #838: Icons missing and/or out of alignment on certain pages.
+- FIX: Position of completion icons and spacer when editing.
+- FIX: Action menu overlapping navbar.
+- FIX: Position of group icons, completion icons and spacer when editing.
+- FIX: Reduce navbar icons jumping when old navbar position.
+- FIX: Table hover icon colour.
+- NEW: Issue #832: Use Core Notification and Messages menus.
+
+New in 3.3.0.2
+==============
+- FIX: Issue #824: Header area/slide show/bullet-menu "on top".
+- FIX: Issue #825: Missing region_main_settings_menu() when using flat navigation.
+- FIX: Issue #827: Flat navigation does not show if blocks were previously docked.
+- FIX: Double section summary editing cog.
+- NEW: Update to flat navigation to be more similar to Boost markup.  Initially for the Grid format.
+
+New in 3.3.0.1
+==============
+- NEW: Initial 'Alpha' version for Moodle 3.3.
+- NEW: Exclude CSS that has already been linted in the LESS and would cause errors as minified.
+- NEW: Add flat navigation option and context header settings menu on the navbar.
+- FIX: Issue #821: Marketing spots no longer responsive for mobiles.
+- FIX: Implement MDL-57769 - Remove 'numsections' from topics and weeks, allow teachers to create and delete sections as they are needed.
+- IFO: Using Essential Font-awesome LESS and font files for easy update.
+
+New in 3.2.1.1
+==============
+- FIX: Issue #817: Incorrect header closing tags in header title area.
+- FIX: Issue #818: Fix Apple touch icon.
+- FIX: Issue #819: Site summary in the header: element div not allowed as child of element h2 in this context.
+- FIX: Font-awesome icon for the recycle bin.
+- FIX: Font-awesome icon for the repositories.
+- FIX: MyCourses default icon.
+- FIX: Font-awesome users icon.
+- FIX: Duplicate socialheading id and redundant profileheading id.
+- NEW: Issue #622: Custom category icon images.  Gratefully funded by Gemma Lesterhuis.
+
+New in 3.2.1.0 - First stable version.
+==============
+- FIX: Issue #812: Add icon replacements for t/message and t/addcontact.  Thanks to Jan Dageförde (https://github.com/Dagefoerde) for this fix.
+- FIX: Stray end tag in grading_navigation.mustache - MDL-58155.
+- FIX: Navbar z-index for the Grid format in M3.2.
+- FIX: Minimum height for the containing area when there is a logo.  This is so that when a calculated height is less than the value then the container is not so small for the social icons etc.
+
+New in 3.2.0.1 - Beta version.
+==============
+- UPD: Core and plugin pix.
+- UPD: TravisCI.
+- UPD: Unread messages language string.
+- UPD: For jQuery 3 needed to escape all '#'s and '"'s in the JS - ref: https://api.jquery.com/category/selectors/.
+- UPD: RTL LESS / CSS and see what can be removed as there is now a 'autoflipping' tool built in to Moodle.
+- UPD: Removed 'essential.css' from production minification so that PHP-RTLCSS comments are preserved and can be processed.
+- UPD: Improved logo to be responsive with different percentage widths for desktops and mobiles.
+- FIX: Social and app icon position in RTL.
+- FIX: Edit action menu icon hover background colour.
+- NEW: Issue #810: Switch role to.
+
+New in 3.1.1.8
+==============
+- FIX: Issue #794: Hidden grade items in user report not clear as such.
+- FIX: Issue #804: 'Hide default page editing button' hides anything that could be in that place.
+- FIX: Issue #805: Suspended user odd rows.
+- FIX: Alternative colour table odd row colour.
+- FIX: RTL header dotted separator appearing twice.
+- FIX: User image table even row background.
+- FIX: Forum table user image link height.
+- FIX: Environment table help icon spacing.
+- NEW: User image border radius settings.
+
+New in 3.1.1.7
+==============
+- FIX: Issue #799: Message avatar overlap.
+- FIX: Issue #802: My courses scroll not working.
+- FIX: Issue #803: Embedded pdf files not displaying in IE 11.
+- NEW: Properties.
+
+New in 3.1.1.6
+==============
+- FIX: Issue #798: Slider title needs to support multi-lang filter.
+- FIX: Course category multi-lang, ref: https://moodle.org/mod/forum/discuss.php?d=344426#p1389008.
+- NEW: Issue #734: Unable to disable the new "page top" block region.
+
+New in 3.1.1.5
+==============
+- FIX: Alternative colour scheme primary button text colour.
+- NEW: Update to FontAwesome 4.7.0.
+- NEW: Add 'Category and course sub-menu' functionality - 'mycoursescatsubmenu' 'Header' setting under 'Courses menu'.  Sponsored by Petra Aartsen, Ontwikkelversneller.
+
 New in 3.1.1.4
 ==============
 - REFIX: Issue #780: Certain grades not appearing in gradebook.
