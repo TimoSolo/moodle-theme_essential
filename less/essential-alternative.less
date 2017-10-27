@@ -778,6 +778,43 @@
                     }
                 }
 
+                #block-region-side-pre .block {
+                    background-color: ~"[[setting:alternativethemesidepreblockbackgroundcolour@{index}]]";
+                    color: ~"[[setting:alternativethemesidepreblocktextcolour@{index}]]";
+                    p.tree_item.branch {
+                        color: ~"[[setting:alternativethemesidepreblocktextcolour@{index}]]";
+                    }
+                    a,
+                    a:visited,
+                    .@{fa-css-prefix} { // Compromise with icon colour.
+                        color: ~"[[setting:alternativethemesidepreblockurlcolour@{index}]]";
+                    }
+                    a:focus,
+                    a:hover,
+                    .@{fa-css-prefix}:focus,
+                    .@{fa-css-prefix}:hover {
+                        color: ~"[[setting:alternativethemesidepreblockhovercolour@{index}]]";
+                    }
+                    .header .title h2 {
+                        color: ~"[[setting:alternativethemesidepreblocktextcolour@{index}]]";
+                    }
+                    &.block_flat_navigation {
+                        background-color: transparent;
+                        .list-group-item {
+                            background-color: ~"[[setting:alternativethemesidepreblockbackgroundcolour@{index}]]";
+                            color: ~"[[setting:alternativethemesidepreblocktextcolour@{index}]]";
+                            a,
+                            a:visited {
+                                color: ~"[[setting:alternativethemesidepreblockurlcolour@{index}]]";
+                            }
+                            a:focus,
+                            a:hover {
+                                color: ~"[[setting:alternativethemesidepreblockhovercolour@{index}]]";
+                            }
+                        }
+                    }
+                }
+
                 &.editing {
                     #page .block-region.yui3-dd-drop-active-valid {
                         border-color: ~"[[setting:alternativethemecolor@{index}]]";
@@ -1354,6 +1391,29 @@
                             color: ~"[[setting:alternativethemestripeurlcolour@{index}]]";
                             background-color: ~"[[setting:alternativethemestripebackgroundcolour@{index}]]";
                         }
+                    }
+                }
+
+                &.path-mod-quiz .submitbtns form[action$="processattempt.php"] input[type="submit"] {
+                    color: ~"[[setting:alternativethemequizsubmittextcolour@{index}]]";
+
+                    text-shadow: none;
+                    background-color: ~"[[setting:alternativethemequizsubmitbackgroundcolour@{index}]]";
+                    background-image: -moz-linear-gradient(bottom, ~"[[setting:alternativethemequizsubmitbackgroundcolourimage@{index}]]", ~"[[setting:alternativethemequizsubmitbackgroundcolourrgba@{index}]]"); // FF 3.6+
+                    background-image: -webkit-gradient(linear, 0 100%, 0 0, from(~"[[setting:alternativethemequizsubmitbackgroundcolourimage@{index}]]"), to(~"[[setting:alternativethemequizsubmitbackgroundcolourrgba@{index}]]")); // Safari 4+, Chrome 2+
+                    background-image: -webkit-linear-gradient(bottom, ~"[[setting:alternativethemequizsubmitbackgroundcolourimage@{index}]]", ~"[[setting:alternativethemequizsubmitbackgroundcolourrgba@{index}]]"); // Safari 5.1+, Chrome 10+
+                    background-image: -o-linear-gradient(bottom, ~"[[setting:alternativethemequizsubmitbackgroundcolourimage@{index}]]", ~"[[setting:alternativethemequizsubmitbackgroundcolourrgba@{index}]]"); // Opera 11.10
+                    background-image: linear-gradient(to top, ~"[[setting:alternativethemequizsubmitbackgroundcolourimage@{index}]]", ~"[[setting:alternativethemequizsubmitbackgroundcolourrgba@{index}]]"); // Standard, IE10
+
+                    &:hover, &:focus, &:active, &.active, &.disabled, &[disabled] {
+                        color: ~"[[setting:alternativethemequizsubmittexthovercolour@{index}]]";
+                        text-shadow: 0 1px 1px rgba(64, 64, 64, .75);
+                        background-color: ~"[[setting:alternativethemequizsubmitbackgroundhovercolour@{index}]]";
+                        background-image: -moz-linear-gradient(bottom, ~"[[setting:alternativethemequizsubmitbackgroundhovercolourimage@{index}]]", ~"[[setting:alternativethemequizsubmitbackgroundhovercolourrgba@{index}]]"); // FF 3.6+
+                        background-image: -webkit-gradient(linear, 0 100%, 0 0, from(~"[[setting:alternativethemequizsubmitbackgroundhovercolourimage@{index}]]"), to(~"[[setting:alternativethemequizsubmitbackgroundhovercolourrgba@{index}]]")); // Safari 4+, Chrome 2+
+                        background-image: -webkit-linear-gradient(bottom, ~"[[setting:alternativethemequizsubmitbackgroundhovercolourimage@{index}]]", ~"[[setting:alternativethemequizsubmitbackgroundhovercolourrgba@{index}]]"); // Safari 5.1+, Chrome 10+
+                        background-image: -o-linear-gradient(bottom, ~"[[setting:alternativethemequizsubmitbackgroundhovercolourimage@{index}]]", ~"[[setting:alternativethemequizsubmitbackgroundhovercolourrgba@{index}]]"); // Opera 11.10
+                        background-image: linear-gradient(to top, ~"[[setting:alternativethemequizsubmitbackgroundhovercolourimage@{index}]]", ~"[[setting:alternativethemequizsubmitbackgroundhovercolourrgba@{index}]]"); // Standard, IE10
                     }
                 }
             }

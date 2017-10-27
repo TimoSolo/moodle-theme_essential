@@ -283,7 +283,7 @@ class core_renderer extends \core_renderer {
      *
      * @return string the HTML to output.
      */
-    public function course_title() {
+    public function course_title($divider = true) {
         $content = '';
         if ($this->page->course->id > 1) {
             $enablecategorycti = $this->get_setting('enablecategorycti');
@@ -355,7 +355,12 @@ class core_renderer extends \core_renderer {
                 $content .= '</div>';
             }
 
-            $content .= '<div class="bor"></div>';
+            if ($divider) {
+                $borclass = 'bor';
+            } else {
+                $borclass = 'no-bor';
+            }
+            $content .= '<div class="'.$borclass.'"></div>';
         }
 
         return $content;
@@ -1249,7 +1254,7 @@ class core_renderer extends \core_renderer {
                         $branch->add($icon.$modfullname, new moodle_url('/course/resources.php',
                             array('id' => $this->page->course->id)));
                     } else {
-                        $icon = '<img src="'.$this->pix_url('icon', $modname) . '" class="icon" alt="" />';
+                        $icon = $this->pix_icon('icon', '', $modname, array('class' => 'icon'));
                         $branch->add($icon.$modfullname, new moodle_url('/mod/'.$modname.'/index.php',
                             array('id' => $this->page->course->id)));
                     }
@@ -2519,7 +2524,7 @@ class core_renderer extends \core_renderer {
         return $html;
     }
 
-    private function getfontawesomemarkup($theicon, $classes = array(), $attributes = array(), $content = '') {
+    protected function getfontawesomemarkup($theicon, $classes = array(), $attributes = array(), $content = '') {
         $classes[] = 'fa fa-'.$theicon;
         $attributes['aria-hidden'] = 'true';
         $attributes['class'] = implode(' ', $classes);
